@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2307052291676914872
 RectTransform:
   m_ObjectHideFlags: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
   setting_Button: {fileID: 32370280922995675}
+  textMeshProUGUI: {fileID: 5907062733602043102}
 --- !u!1 &2222975112792591355
 GameObject:
   m_ObjectHideFlags: 0

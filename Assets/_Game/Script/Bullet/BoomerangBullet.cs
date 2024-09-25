@@ -1,43 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoomerangBullet : Bullet
-{
-    float x, y;
-    private bool again = false; 
-    private void Start()
-    {
-        OnInit();
-    }
+{ 
+    private bool isReturn = false;
     private void Update()
     {
-        y += 20;
-        Trajectory(x, y);
-        TimeALive();
+        if (canMove)
+        {
+            Move();
+           
+        }
+        Trajectory();
+        TimeALive();  
     }
     public override void OnInit()
     {
         base.OnInit();
-        x = 0;
-        y = 0;
     }
-    private void Trajectory(float x, float y)
+    public override void Move()
     {
-        transform.rotation = Quaternion.Euler(x, y, 0);
+        if (!isReturn)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, startPos, speed * Time.deltaTime);
+        }
     }
     public override void TimeALive()
     {
-        if (Vector3.Distance(startPos, transform.position) > 5f)
+        if (Vector3.Distance(startPos, transform.position) >= maxDistance)
         {
-            again = true;
+            isReturn = true;
         }
-        if (again) {
-            if(Vector3.Distance(startPos,transform.position) < -0.1f)
+        if (isReturn)
+        {
+            if (Vector3.Distance(startPos, transform.position) < 0.1f)
             {
-                Destroy(gameObject);
+                HBPool.Despawn(this);
+                isReturn = false;   
             }
         }
-        
     }
 }

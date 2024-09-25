@@ -13,19 +13,31 @@ MonoBehaviour:
   m_Name: WeaponItemData
   m_EditorClassIdentifier: 
   weapons:
-  - id: 1
-    prefabWeapon: {fileID: 0}
+  - id: 0
+    Name: 
+    prefabWeaponInHand: {fileID: 0}
+    prefabWeaponBullet: {fileID: 0}
     weaponType: 0
+    WeaponShowType: 0
+    price: 100
+  - id: 1
+    Name: Soul Knife
+    prefabWeaponInHand: {fileID: -1193337229033955276, guid: b384f6209bb97294ca14259605d7cebd, type: 3}
+    prefabWeaponBullet: {fileID: 7833910287863059567, guid: 52e51e6c922c8264c9a9eba01782e0d8, type: 3}
+    weaponType: 1
+    WeaponShowType: 5
     price: 100
   - id: 2
-    prefabWeapon: {fileID: 0}
-    weaponType: 1
-    price: 100
-  - id: 3
-    prefabWeapon: {fileID: 6529908546243041704, guid: 160f451c91f61084fb565fdff9ea251c, type: 3}
+    Name: Thor'sHeymer
+    prefabWeaponInHand: {fileID: 8033554992847626097, guid: db62894894bf40f4e89d4d5349014837, type: 3}
+    prefabWeaponBullet: {fileID: 6529908546243041704, guid: 160f451c91f61084fb565fdff9ea251c, type: 3}
     weaponType: 2
-    price: 100
+    WeaponShowType: 7
+    price: 150
   - id: 3
-    prefabWeapon: {fileID: 6109584803079050642, guid: 579e6d8eb0a8d944486e3ace1788d7f6, type: 3}
+    Name: Lighting
+    prefabWeaponInHand: {fileID: 1816966574120502603, guid: 48902092cfe46af4ebc626a1af1bf074, type: 3}
+    prefabWeaponBullet: {fileID: 6109584803079050642, guid: 579e6d8eb0a8d944486e3ace1788d7f6, type: 3}
     weaponType: 3
-    price: 100
+    WeaponShowType: 9
+    price: 200

@@ -12,6 +12,8 @@ public class PoolControler : MonoBehaviour
 
     [Header("Pool")]
     public List<PoolAmount> PoolWithRoot;
+    
+    
 
     [Header("Particle")]
     public ParticleAmount[] Particle;
@@ -72,11 +74,22 @@ public enum ParticleType
 
 public enum PoolType
 {
-    None = 0,
-    Bullet = 1,
-    Bot = 2,
-    Player = 3,
-    
+    Image ,
+    Bullet ,
+    Bot ,
+    Player ,
+    Knive ,
+    W_Knive,
+    Hammer ,
+    W_Hammer , 
+    Boomerang ,
+    W_Boomerang  
+}
+public enum WeaponShowType
+{
+    Knive = PoolType.W_Knive,
+    Hammer = PoolType.W_Hammer,
+    Boomerang = PoolType.W_Boomerang,
 }
 
 

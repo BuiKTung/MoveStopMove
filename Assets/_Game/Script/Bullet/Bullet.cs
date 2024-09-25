@@ -6,40 +6,66 @@ using UnityEngine;
 public class Bullet : GameUnit
 {
     [SerializeField] Rigidbody rb;
+    [SerializeField] private Characters owner;
+    [SerializeField] public float speed;
+    [SerializeField] public float rotationSpeed = 500;
+    [SerializeField] public bool isYRotation;
+    [SerializeField] public bool isZRotation;
+    [SerializeField] public float maxDistance = 20f;
     public Vector3 startPos;
-    [SerializeField]private Characters owner;
-    
+    public Vector3 direction;
+    public bool canMove;
+    public bool isBoomerang;
     public virtual void TimeALive()
     {
-        if (Vector3.Distance(startPos, transform.position) > 5f)
+        if (Vector3.Distance(startPos, transform.position) >= maxDistance)
         {
-            HBPool.Despawn(this);
+            OnDesSpawn();
         }
     }
     public virtual void OnInit()
     {
         startPos = transform.position;
+        canMove = false;
     }
-    public void Launch(Vector3 direction, float force)
+    public virtual void OnDesSpawn()
     {
-        rb.AddForce(direction * force);
+        HBPool.Despawn(this);
+
+    }
+    public virtual void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
     }
     public void SetOwner(Characters owner)
     {
         this.owner = owner;
     }
-    
-    private void OnTriggerEnter(Collider other)
+    public void SetDirection(Vector3 dir)
     {
-        if (other.CompareTag(ConstanString.TAG_CHARACTER) && other.gameObject != owner) 
+        this.direction = dir;
+        canMove = true;
+    }
+    public void Trajectory()
+    {
+        if (isYRotation)
+            transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        if (isZRotation)
+            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(ConstanString.TAG_CHARACTER) && other.gameObject != owner.gameObject)
         {
             //Debug.Log(other.gameObject);
             Characters character = CacheGetComponent.GetCharacters(other);
             character.onDeath();
-            HBPool.Despawn(this);
+            if (!isBoomerang)
+                HBPool.Despawn(this);
             owner.LevelUpRange();
-           
-            ParticlePool.Play(ParticleType.SingleThunder,transform.position,Quaternion.identity);  
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.take_coin);
+            ParticlePool.Play(ParticleType.SingleThunder, transform.position, Quaternion.identity);
         }
     }
+
 }

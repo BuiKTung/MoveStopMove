@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,6 +9,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] List<Transform> list_SP;
     [SerializeField] List<Level> list_LV;
     [SerializeField] public DynamicJoystick joystick;
+    
     public int botDead;
     private int levelID = 0;
     private Level currentLevel;
@@ -64,12 +66,13 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void Spawn()
     {
-        HBPool.Spawn<Player>(PoolType.Player,currentLevel.startPos.position,Quaternion.identity).joystick = joystick;
+        Player player = HBPool.Spawn<Player>(PoolType.Player, currentLevel.startPos.position, Quaternion.identity);
+        player.joystick = joystick;
+        player.OnInnit();
         for (int i = 0; i < list_SP.Count; i++)
         {
-            HBPool.Spawn<Bot>(PoolType.Bot, list_SP[i].position, Quaternion.identity);
+            Bot bot = HBPool.Spawn<Bot>(PoolType.Bot, list_SP[i].position, Quaternion.identity);
         }
-        Debug.Log(1);
     }
     public void Reset()
     {
@@ -89,6 +92,5 @@ public class LevelManager : Singleton<LevelManager>
         Reset();
         LoadLevel(levelID);
         OnInit();
-        
     }
 }

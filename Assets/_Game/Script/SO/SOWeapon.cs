@@ -14,11 +14,19 @@ public enum WeaponType
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SOWeapon", order = 1)]
 public class SOWeapon : ScriptableObject
 {
-    [SerializeField] private WeaponItemData[] weapons;
+    [SerializeField] public WeaponItemData[] weapons;
 
-    public WeaponItemData GetWeapon(WeaponType weaponType, int id)
+    public WeaponItemData GetWeapon(WeaponType weaponType)
     {
         WeaponItemData weaponItemData = new WeaponItemData();
+        for(int i = 0; i < weapons.Length; i++)
+        {
+            if(weapons[i].weaponType == weaponType)
+            {
+                weaponItemData = weapons[i];
+                break;
+            }
+        }
         return weaponItemData;
     }
 }

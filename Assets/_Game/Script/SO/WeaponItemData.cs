@@ -8,8 +8,11 @@ public class WeaponItemData
     public static int nextId;
     [SerializeField] private int id;
     public int Id { get => id; private set => id = value; }
-    public GameObject prefabWeapon;
+    public string Name;
+    public Weapon prefabWeaponInHand;
+    public GameObject prefabWeaponBullet;
     public WeaponType weaponType;
+    public WeaponShowType WeaponShowType;
     public int price;
     public WeaponItemData()
     {
@@ -18,3 +21,4 @@ public class WeaponItemData
     }
 
 }
+

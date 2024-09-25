@@ -35,6 +35,7 @@ public class Setting : UICanvas
     public void MainMenuButton()
     {
         UIManager.Ins.OpenUI<MainMenu>();
+        UIManager.Ins.CloseUI<GamePlay>();
         LevelManager.Ins.Reset();
         Close(0);
     }
